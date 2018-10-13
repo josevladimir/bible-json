@@ -1,0 +1,13 @@
+(63, 1, 1, 'El anciano a la señora elegida y a sus hijos, a quienes yo amo en la verdad; y no sólo yo, sino también todos los que han conocido la verdad,'),
+(63, 1, 2, 'a causa de la verdad que permanece en nosotros, y estará para siempre con nosotros:'),
+(63, 1, 3, 'Sea con vosotros gracia, misericordia y paz, de Dios Padre y del Señor Jesucristo, Hijo del Padre, en verdad y en amor.'),
+(63, 1, 4, 'Mucho me regocijé porque he hallado a algunos de tus hijos andando en la verdad, conforme al mandamiento que recibimos del Padre.'),
+(63, 1, 5, 'Y ahora te ruego, señora, no como escribiéndote un nuevo mandamiento, sino el que hemos tenido desde el principio, que nos amemos unos a otros.'),
+(63, 1, 6, 'Y este es el amor, que andemos según sus mandamientos. Este es el mandamiento: que andéis en amor, como vosotros habéis oído desde el principio.'),
+(63, 1, 7, 'Porque muchos engañadores han salido por el mundo, que no confiesan que Jesucristo ha venido en carne. Quien esto hace es el engañador y el anticristo.'),
+(63, 1, 8, 'Mirad por vosotros mismos, para que no perdáis el fruto de vuestro trabajo, sino que recibáis galardón completo.'),
+(63, 1, 9, 'Cualquiera que se extravía, y no persevera en la doctrina de Cristo, no tiene a Dios; el que persevera en la doctrina de Cristo, ése sí tiene al Padre y al Hijo.'),
+(63, 1, 10, 'Si alguno viene a vosotros, y no trae esta doctrina, no lo recibáis en casa, ni le digáis: ¡Bienvenido!'),
+(63, 1, 11, 'Porque el que le dice: ¡Bienvenido! participa en sus malas obras.'),
+(63, 1, 12, 'Tengo muchas cosas que escribiros, pero no he querido hacerlo por medio de papel y tinta, pues espero ir a vosotros y hablar cara a cara, para que nuestro gozo sea cumplido.'),
+(63, 1, 13, 'Los hijos de tu hermana, la elegida, te saludan. Amén.')
