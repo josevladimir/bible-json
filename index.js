@@ -28,9 +28,9 @@ fs.readdir(directoryPath, function (err, files) {
                 var content = linea.substring(linea.indexOf('\'') + 1, linea.lastIndexOf('\''));
                 book.number = dats[0];
                 book.content.push({
-                    chapter: dats[1],
-                    verse: dats[2],
-                    content: content
+                    chapter: dats[1].trim(),
+                    verse: dats[2].trim(),
+                    content: content.replace('/n', '').trim()
                 });
             })
             initial.books.push(book);
