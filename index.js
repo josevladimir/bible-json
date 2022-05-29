@@ -1,60 +1,54 @@
 const fs = require('fs');
 const Path = require('path');
 
+var directoryPath = Path.join(__dirname, 'origen');
 
-let libro = new Array()
+var initial = {
+    version: 'Reyna Valera 60',
+    books: []
+};
+fs.readdir(directoryPath, function (err, files) {
 
-for (var i = 0; i < 22; i++) {
-    libro[i] = []
-}
-fs.readFile(Path.join(__dirname, '/origen/apocalipsis.txt'), 'utf-8', function (error, data) {
-    if (error) console.log(error);
-    let arreglo_lineas = data.split(/,\n/);
-    arreglo_lineas.forEach(linea => {
-        index = linea.charAt(5)
-        if (linea.charAt(6) !== ',') index += linea.charAt(6)
-        if (linea.charAt(7) !== ',') index += linea.charAt(7)
-        libro[parseInt(index) - 1].push(linea)
-    })
+    if (err) {
+        return console.log('Unable to scan directory: ' + err);
+    } 
     
-    console.log(libro)
-
-    for (var indiceC = 0; indiceC < libro.length; indiceC++) {
-        for (var indiceV = 0; indiceV < libro[indiceC].length; indiceV++) {
-            let nuevo_verso
-            if(((indiceV + 1) < 10) && ((indiceC +1) < 10)){
-                nuevo_verso = libro[indiceC][indiceV].substring(12,libro[indiceC][indiceV].length - 2)
-            }else if(((indiceV + 1) < 100) && ((indiceV + 1) >= 10) && ((indiceC +1) < 10)){
-                nuevo_verso = libro[indiceC][indiceV].substring(13,libro[indiceC][indiceV].length - 2)
-            }else if(((indiceV + 1) < 10) && ((indiceC +1) >= 10) && ((indiceC +1) < 100)){
-                nuevo_verso = libro[indiceC][indiceV].substring(13,libro[indiceC][indiceV].length - 2)
-            }else if(((indiceV + 1) < 100) && ((indiceV + 1) >= 10) && ((indiceC +1) >= 10) && ((indiceC +1) < 100)){
-                nuevo_verso = libro[indiceC][indiceV].substring(14,libro[indiceC][indiceV].length - 2)
-            }else if(((indiceV + 1) < 10) && ((indiceC +1) >= 100)){
-                nuevo_verso = libro[indiceC][indiceV].substring(14,libro[indiceC][indiceV].length - 2)
-            }else if(((indiceV + 1) >= 10) && ((indiceV + 1) < 100) && ((indiceC +1) >= 100)){
-                nuevo_verso = libro[indiceC][indiceV].substring(15,libro[indiceC][indiceV].length - 2)
-            }else if(((indiceV + 1) >= 100) && ((indiceC +1) >= 100)){
-                nuevo_verso = libro[indiceC][indiceV].substring(16,libro[indiceC][indiceV].length - 2)
+    files.forEach(function (file) {
+        
+        fs.readFile(Path.join(__dirname, '/origen/' + file), 'utf-8', function (error, data) {
+            if (error) console.log(error);
+            let book = {
+                name: file.substring(0, file.indexOf('.')).replace('_', ' '),
+                number: 0,
+                content: []
             }
-            libro[indiceC][indiceV] = nuevo_verso
-        }
-    }
+            let arreglo_lineas = data.split('\n');
+            arreglo_lineas.forEach(linea => {
+                var dats = linea.substring(1, linea.indexOf('\'') - 2).split(',');
+                var content = linea.substring(linea.indexOf('\'') + 1, linea.lastIndexOf('\''));
+                book.number = dats[0];
+                book.content.push({
+                    chapter: dats[1].trim(),
+                    verse: dats[2].trim(),
+                    content: content.replace('/n', '').trim()
+                });
+            })
+            initial.books.push(book);
 
-    let file = ''
-
-    for (var indiceC = 0; indiceC < libro.length; indiceC++) {
-        file += '['
-        for (var indiceV = 0; indiceV < libro[indiceC].length; indiceV++) {
-            file += `'${libro[indiceC][indiceV]}'`
-            if (indiceV !== (libro[indiceC].length - 1)) file += ','
-        }
-        file += ']'
-        if (indiceC !== (libro.length -1 )) file += ','
-    }
-
-    fs.writeFile(Path.join(__dirname, './procesados/apocalipsis.js'),`module.exports = [\n${file}\n]`,'utf-8', function (error) {
-        if (error) console.log(error)
-    })
-
-})
+            initial.books.sort(function(x, y){
+                if(Number(x.number) < Number(y.number)){
+                    return -1;
+                }
+                if(Number(x.number) > Number(y.number)){
+                    return 1;
+                }
+                return 0;
+            });
+        
+            fs.writeFile(Path.join(__dirname, './procesados/bible.json'),JSON.stringify(initial, null, 4),'utf-8', function (error) {
+                if (error) console.log(error)
+            })
+        
+        })
+    });
+});
