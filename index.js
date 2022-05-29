@@ -45,7 +45,7 @@ fs.readdir(directoryPath, function (err, files) {
                 return 0;
             });
         
-            fs.writeFile(Path.join(__dirname, './procesados/all.js'),JSON.stringify(initial),'utf-8', function (error) {
+            fs.writeFile(Path.join(__dirname, './procesados/bible.json'),JSON.stringify(initial, null, 4),'utf-8', function (error) {
                 if (error) console.log(error)
             })
         
